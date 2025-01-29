@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ScheduledClassController;
+use App\Models\ScheduledClass;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -18,8 +20,12 @@ Route::get('/admin/dashboard', function () {
     return view('admin.dashboard');
 })->middleware(['auth', 'role:admin'])->name('admin.dashboard');
 
+Route::resource('/instructor/schedule', ScheduledClassController::class)
+->only(['index', 'create','store','destroy'])
+->middleware(['auth', 'role:instructor']);
+
 Route::get('/instructor/dashboard', function () {
-    return view('instructordashboard');
+    return view('instructor.dashboard');
 })->middleware(['auth', 'role:instructor'])->name('instructor.dashboard');
 
 Route::middleware('auth')->group(function () {
