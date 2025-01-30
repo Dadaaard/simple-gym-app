@@ -8,8 +8,6 @@ class ClassType extends Model
 {
     //
 
-    protected $fillable = ['name', 'description', 'minutes'];
-
     public function scheduledClasses()
     {
         return $this->hasMany(ScheduledClass::class);

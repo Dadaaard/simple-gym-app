@@ -8,7 +8,11 @@ class ScheduledClass extends Model
 {
     //
 
-    protected $fillable = ['instructor_id', 'class_type_id', 'date_time'];
+    protected $guarded = null;
+
+    protected $casts = [
+        'date_time' => 'datetime',
+    ];
 
     public function classType()
     {
