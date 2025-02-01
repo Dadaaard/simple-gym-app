@@ -4,6 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Gate;
+use App\Models\ScheduledClass;
+use App\Policies\ScheduledClassPolicy;
+use App\Models\User;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,6 +24,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         //
-        Gate::policy(\App\Models\ScheduledClass::class, \App\Policies\ScheduledClassPolicy::class);
+        // Gate::policy(ScheduledClass::class, ScheduledClassPolicy::class);
+        Gate::define('schedule-class', function(User $user){
+            return $user->role === 'instructor';
+        });
     }
 }
