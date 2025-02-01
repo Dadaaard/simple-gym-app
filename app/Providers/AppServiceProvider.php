@@ -24,7 +24,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         //
-        // Gate::policy(ScheduledClass::class, ScheduledClassPolicy::class);
         Gate::define('schedule-class', function(User $user){
             return $user->role === 'instructor';
         });
