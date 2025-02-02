@@ -30,9 +30,10 @@ class ScheduledClassPolicy
     public function create(User $user): bool
     {
 
-        if($user->role === 'instructor') {
+        if ($user->role === 'instructor') {
             return true;
         }
+
         return false;
     }
 
@@ -41,7 +42,7 @@ class ScheduledClassPolicy
      */
     public function update(User $user, ScheduledClass $scheduledClass): Response
     {
-        
+
         return $user->id === $scheduledClass->user_id
                 ? Response::allow()
                 : Response::deny('You do not own this post.');

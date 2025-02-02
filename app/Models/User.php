@@ -46,7 +46,6 @@ class User extends Authenticatable
         ];
     }
 
-
     public function scheduledClasses()
     {
         return $this->hasMany(ScheduledClass::class, 'instructor_id');

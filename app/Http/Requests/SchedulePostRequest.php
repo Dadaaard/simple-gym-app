@@ -28,7 +28,6 @@ class SchedulePostRequest extends FormRequest
         ];
     }
 
-
     /**
      * Get the error messages for the defined validation rules.
      *
@@ -38,9 +37,9 @@ class SchedulePostRequest extends FormRequest
     {
         return [
             'type.required' => 'A type is required',
-            'type.exists'  => 'The type does not exist anymore',
-            'date.required'  => 'A date is required',
-            'time.required'  => 'A time is required',
+            'type.exists' => 'The type does not exist anymore',
+            'date.required' => 'A date is required',
+            'time.required' => 'A time is required',
         ];
     }
 }

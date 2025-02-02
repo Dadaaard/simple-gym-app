@@ -2,29 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\SchedulePostRequest;
-use Illuminate\Http\Request;
 use App\Models\ClassType;
-use Illuminate\Support\Facades\Auth;
 use App\Models\ScheduledClass;
-use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ScheduledClassController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        
+
         $scheduledClasses = Auth::user()->scheduledClasses()
-        ->where('date_time', '>', now()) 
-        ->orderBy('date_time', 'asc') 
-        ->paginate(5); 
+            ->where('date_time', '>', now())
+            ->orderBy('date_time', 'asc')
+            ->paginate(5);
 
         return view('instructor.upcoming', ['scheduledClasses' => $scheduledClasses]);
-        
+
     }
 
     /**
@@ -32,10 +29,10 @@ class ScheduledClassController extends Controller
      */
     public function create()
     {
-        
+
         $classTypes = ClassType::all();
 
-        return view('instructor.schedule' , ['classTypes' => $classTypes]);
+        return view('instructor.schedule', ['classTypes' => $classTypes]);
     }
 
     /**
@@ -44,10 +41,10 @@ class ScheduledClassController extends Controller
     public function store(Request $request)
     {
 
-        //combine date and time into a single datetime field
-        $datetime = $request->input('date') . ' ' . $request->input('time');
+        // combine date and time into a single datetime field
+        $datetime = $request->input('date').' '.$request->input('time');
 
-        //merge the datetime and instructor_id into the request for validation
+        // merge the datetime and instructor_id into the request for validation
         $request->merge([
             'date_time' => $datetime,
             'instructor_id' => Auth::id(),
@@ -56,14 +53,13 @@ class ScheduledClassController extends Controller
         $validated = $request->validate([
             'class_type_id' => 'required',
             'instructor_id' => 'required',
-            'date_time' => 'required|unique:scheduled_classes,date_time|after:now'
+            'date_time' => 'required|unique:scheduled_classes,date_time|after:now',
         ]);
 
-        //save the validated data into the database
+        // save the validated data into the database
         ScheduledClass::create($validated);
 
         return redirect()->back();
-
 
     }
 
@@ -96,8 +92,8 @@ class ScheduledClassController extends Controller
      */
     public function destroy(ScheduledClass $schedule)
     {
-        
-        if(Auth::user()->cannot('delete', $schedule)) {
+
+        if (Auth::user()->cannot('delete', $schedule)) {
             abort(403);
         }
         $schedule->delete();

@@ -20,8 +20,8 @@ class DashboardController extends Controller
             case 'admin':
                 return redirect()->route('admin.dashboard');
             default:
-                
-            break;
+
+                break;
         }
     }
 }
