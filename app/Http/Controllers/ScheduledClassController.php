@@ -61,7 +61,7 @@ class ScheduledClassController extends Controller
         // save the validated data into the database
         ScheduledClass::create($validated);
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Class scheduled successfully');
 
     }
 
