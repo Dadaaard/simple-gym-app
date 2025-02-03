@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GeminiController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ScheduledClassController;
 use Illuminate\Support\Facades\Route;
@@ -10,6 +11,11 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', DashboardController::class)->middleware(['auth'])->name('dashboard');
+
+
+//gemini test
+// Route::get('/ds', GeminiController::class)->middleware(['auth'])->name('dashboard');
+
 
 Route::get('/member/dashboard', function () {
     return view('member.dashboard');

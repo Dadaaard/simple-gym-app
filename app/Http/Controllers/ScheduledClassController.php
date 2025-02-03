@@ -6,6 +6,7 @@ use App\Models\ClassType;
 use App\Models\ScheduledClass;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 
 class ScheduledClassController extends Controller
 {
@@ -19,6 +20,7 @@ class ScheduledClassController extends Controller
             ->where('date_time', '>', now())
             ->orderBy('date_time', 'asc')
             ->paginate(5);
+
 
         return view('instructor.upcoming', ['scheduledClasses' => $scheduledClasses]);
 
@@ -100,4 +102,9 @@ class ScheduledClassController extends Controller
 
         return redirect()->route('schedule.index');
     }
+
+    /**
+     * Gemini.
+     */
+
 }
