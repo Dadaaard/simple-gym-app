@@ -13,33 +13,36 @@ class BookingController extends Controller
     
     public function index()
     {
-        return view('member.bookings');
+
+        
+        $bookings = Auth::user()->bookings()->get();
+
+      
+
+        return view('member.upcoming', compact('bookings'));
     }
 
     public function create()
     {
         $scheduledClasses = ScheduledClass::where('date_time', '>', now())->with('classType', 'instructor')->oldest()->get();
        
-
         return view('member.book', compact('scheduledClasses'));
     }
 
     public function store(Request $request)
     {
 
-        dd($request->class_type_id);
-        // $validated = $request->validate([
-        //     'scheduled_class_id' => 'required',
-        // ]);
+        Auth::user()->bookings()->attach($request->class_type_id);
+        
 
-        // $scheduledClass = ScheduledClass::find($validated['scheduled_class_id']);
-        // $scheduledClass->members()->attach(Auth::user()->id);
-
-        // return redirect()->back()->with('success', 'Class scheduled successfully');
+        return redirect()->back();
     }
 
     public function destroy()
     {
         //
+        $booking = Auth::user()->bookings()->detach();
+
+        return redirect()->back();
     }
 }
