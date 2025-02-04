@@ -27,7 +27,7 @@ class BookingController extends Controller
     public function store(Request $request)
     {
 
-        dd(Auth::check());
+        dd($request->class_type_id);
         // $validated = $request->validate([
         //     'scheduled_class_id' => 'required',
         // ]);
