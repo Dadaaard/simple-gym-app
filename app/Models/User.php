@@ -6,6 +6,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\ScheduledClass;
+use App\Models\Booking; // Ensure this class exists in the specified namespace
+use Illuminate\Console\Scheduling\Schedule;
 
 class User extends Authenticatable
 {
@@ -33,6 +36,8 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    
+
     /**
      * Get the attributes that should be cast.
      *
@@ -49,5 +54,10 @@ class User extends Authenticatable
     public function scheduledClasses()
     {
         return $this->hasMany(ScheduledClass::class, 'instructor_id');
+    }
+
+    public function bookings()
+    {
+        return $this->belongsToMany(ScheduledClass::class, 'bookings');
     }
 }
