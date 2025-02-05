@@ -29,7 +29,7 @@ class BookingController extends Controller
         function ($query) { 
             $query->where('user_id', Auth::id()); 
         })
-        ->oldest()->get();
+        ->oldest('date_time')->get();
        
         return view('member.book', compact('scheduledClasses'));
     }
