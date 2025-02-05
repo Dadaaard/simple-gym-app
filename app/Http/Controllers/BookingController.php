@@ -13,18 +13,23 @@ class BookingController extends Controller
     
     public function index()
     {
+        
+        $bookings = Auth::user()->bookings()->Upcoming()->get();
 
         
-        $bookings = Auth::user()->bookings()->get();
-
-      
 
         return view('member.upcoming', compact('bookings'));
     }
 
     public function create()
     {
-        $scheduledClasses = ScheduledClass::where('date_time', '>', now())->with('classType', 'instructor')->oldest()->get();
+        $scheduledClasses = ScheduledClass::upcoming()
+        ->with('classType', 'instructor')
+        ->whereDoesntHave('members', 
+        function ($query) { 
+            $query->where('user_id', Auth::id()); 
+        })
+        ->oldest()->get();
        
         return view('member.book', compact('scheduledClasses'));
     }
@@ -32,16 +37,18 @@ class BookingController extends Controller
     public function store(Request $request)
     {
 
+
         Auth::user()->bookings()->attach($request->class_type_id);
+        
         
 
         return redirect()->back();
     }
 
-    public function destroy()
+    public function destroy(int $id)
     {
-        //
-        $booking = Auth::user()->bookings()->detach();
+     
+        Auth::user()->bookings()->detach($id);
 
         return redirect()->back();
     }

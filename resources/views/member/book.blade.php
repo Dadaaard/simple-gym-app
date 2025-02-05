@@ -22,15 +22,15 @@
                            <p class="text-sm">{{ $class->date_time->format('jS M') }}</p>
                         </div>
                      </div>
-                     
+                    
                      <div class="mt-1 text-right">
                         <div class="flex gap-6 justify-between">
                             <p class="text-sm font-bold text-pink-700">Instructor: {{ $class->instructor->name }}</p>
                         <form method="post" action="{{ route('booking.store') }}">
                            @csrf
-                           @method('POST')
+                           
 
-                           <input type="hidden" name="class_type_id" value="{{ $class->class_type_id }}">
+                           <input type="hidden" name="class_type_id" value="{{ $class->id }}">
                            <button type="submit" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">Book</button>
                         </form>
                         </div>

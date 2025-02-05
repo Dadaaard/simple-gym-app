@@ -23,7 +23,7 @@
                      </div>
                     
                      <div class="mt-1 text-right">
-                        <form method="post" action="{{ route('booking.destroy', $class) }}">
+                        <form method="post" action="{{ route('booking.destroy', [$class->id]) }}">
                            @csrf
                            @method('DELETE')
                            <x-danger-button class="px-3 py-1">Cancel</x-danger-button>
