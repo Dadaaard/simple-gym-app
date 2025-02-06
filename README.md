@@ -5,10 +5,13 @@
 
 
 
-- 
-- 
-- 
-- 
-- 
-- 
+- Custom Middleware
+- CRUD
+- Gates and Policies
+- Seeder
+- Many to Many Relationship
+- Eager Loading
+- Write Command
+- Events and Listeners
+- Logs
 
