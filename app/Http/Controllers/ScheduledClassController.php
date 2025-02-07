@@ -7,7 +7,7 @@ use App\Models\ScheduledClass;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
-use app\Events\ClassCanceled;
+use App\Events\ClassCanceled;
 
 class ScheduledClassController extends Controller
 {
@@ -102,8 +102,8 @@ class ScheduledClassController extends Controller
 
         ClassCanceled::dispatch($schedule);
 
-        $schedule->delete();
-        $schedule->members()->detach();
+        // $schedule->delete();
+        // $schedule->members()->detach();
 
         return redirect()->route('schedule.index');
     }

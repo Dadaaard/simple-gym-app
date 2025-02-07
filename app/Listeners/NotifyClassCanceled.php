@@ -5,6 +5,7 @@ namespace App\Listeners;
 use App\Events\ClassCanceled;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Facades\Log;
 
 class NotifyClassCanceled
 {
@@ -22,5 +23,6 @@ class NotifyClassCanceled
     public function handle(ClassCanceled $event): void
     {
         $scheduledClass = $event->schedule;
+        Log::info('Class canceled: ' . $scheduledClass->id);
     }
 }

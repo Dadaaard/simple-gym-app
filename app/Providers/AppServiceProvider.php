@@ -5,7 +5,7 @@ namespace App\Providers;
 use App\Events\ClassCanceled;
 use App\Listeners\NotifyClassCanceled;
 use App\Models\User;
-use Illuminate\Console\Scheduling\Event;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
