@@ -2,7 +2,6 @@
 
 namespace App\Events;
 
-use App\Models\ScheduledClass;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -10,18 +9,18 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use App\Models\ScheduledClass;
 
-class ClassCanceled
+class TestEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-
 
     /**
      * Create a new event instance.
      */
-    public function __construct(public ScheduledClass $scheduledClass)
+    public function __construct(public ScheduledClass $schedule)
     {
-       
+        //
     }
 
     /**

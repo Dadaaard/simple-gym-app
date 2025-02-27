@@ -1,0 +1,1 @@
+<p>Your class {{$details['className']}}  has been canceled.</p>

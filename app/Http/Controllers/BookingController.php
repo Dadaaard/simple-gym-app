@@ -48,6 +48,7 @@ class BookingController extends Controller
     public function destroy(int $id)
     {
      
+        
         Auth::user()->bookings()->detach($id);
 
         return redirect()->back();

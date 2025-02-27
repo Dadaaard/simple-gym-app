@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use App\Events\ClassCanceled;
+use App\Events\TestEvent;
 
 class ScheduledClassController extends Controller
 {
@@ -100,7 +101,7 @@ class ScheduledClassController extends Controller
             abort(403);
         }
 
-        ClassCanceled::dispatch($schedule);
+        event(new ClassCanceled($schedule));
 
         // $schedule->delete();
         // $schedule->members()->detach();

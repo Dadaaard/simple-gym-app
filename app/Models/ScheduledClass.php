@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
 class ScheduledClass extends Model
 {
@@ -13,26 +13,22 @@ class ScheduledClass extends Model
     protected $guarded = null;
 
     protected $casts = [
-        'date_time' => 'datetime',
+        'date_time' => 'datetime'
     ];
 
-    public function classType()
-    {
+    public function instructor() {
+        return $this->belongsTo(User::class, 'instructor_id');
+    }
+
+    public function classType() {
         return $this->belongsTo(ClassType::class);
     }
 
-    public function instructor()
-    {
-        return $this->belongsTo(User::class , 'instructor_id');
-    }
-
-    public function members()
-    {
+    public function members() {
         return $this->belongsToMany(User::class, 'bookings');
     }
 
-    public function scopeUpcoming(Builder $query)
-    {
+    public function scopeUpcoming(Builder $query) {
         return $query->where('date_time', '>', now());
     }
 }
