@@ -4,6 +4,9 @@ namespace App\Jobs;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\ClassCanceledNotification;
+
 
 class NotifyClassCanceledJob implements ShouldQueue
 {
@@ -12,7 +15,7 @@ class NotifyClassCanceledJob implements ShouldQueue
     /**
      * Create a new job instance.
      */
-    public function __construct()
+    public function __construct(public $members,public array $details)
     {
         //
     }
@@ -22,6 +25,6 @@ class NotifyClassCanceledJob implements ShouldQueue
      */
     public function handle(): void
     {
-        //
+        Notification::send($this->members, new ClassCanceledNotification($this->details));
     }
 }

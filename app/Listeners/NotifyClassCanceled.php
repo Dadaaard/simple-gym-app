@@ -11,6 +11,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Mockery\Matcher\Not;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\ClassCanceledNotification;
+use App\Jobs\NotifyClassCanceledJob;
 
 class NotifyClassCanceled
 {
@@ -39,6 +40,6 @@ class NotifyClassCanceled
             Mail::to($user)->send(new ClassCanceledMail($details));
         });
 
-        Notification::send($members, new ClassCanceledNotification($details));
+        NotifyClassCanceledJob::dispatch($members,$details);
     }
 }
